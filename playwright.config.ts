@@ -4,19 +4,17 @@ import { PlaywrightTestConfig, devices } from '@playwright/test';
  * See https://playwright.dev/docs/test-configuration.
  */
 const config: PlaywrightTestConfig = {
-
   testDir: './tests',
 
   /* Maximum time one test can run for. */
-  timeout: 30 * 1000,
+  timeout: 60 * 1000,
 
   expect: {
-
     /**
      * Maximum time expect() should wait for the condition to be met.
      * For example in `await expect(locator).toHaveText();`
      */
-    timeout: 5000
+    timeout: 5000,
   },
 
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -29,13 +27,25 @@ const config: PlaywrightTestConfig = {
   workers: process.env.CI ? 1 : undefined,
 
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
+  reporter: [
+    ['dot'],
+    // ['json', { outputFile: 'test-result.json'}],
+    // [
+    //   'html',
+    //   {
+    //     open: 'never',
+    //   },
+    // ],
+  ],
 
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
-
     /* Maximum time each action such as `click()` can take. Defaults to 0 (no limit). */
-    actionTimeout: 0,
+    // actionTimeout: 0,
+    headless: !true,
+    screenshot: 'on',
+    video: 'on',
+    trace: 'on',
 
     /* Base URL to use in actions like `await page.goto('/')`. */
     // baseURL: 'http://localhost:3000',
@@ -48,27 +58,23 @@ const config: PlaywrightTestConfig = {
   projects: [
     {
       name: 'chromium',
-
       /* Project-specific settings. */
       use: {
         ...devices['Desktop Chrome'],
       },
     },
-
-    {
-      name: 'firefox',
-      use: {
-        ...devices['Desktop Firefox'],
-      },
-    },
-
-    {
-      name: 'webkit',
-      use: {
-        ...devices['Desktop Safari'],
-      },
-    },
-
+    // {
+    //   name: 'firefox',
+    //   use: {
+    //     ...devices['Desktop Firefox'],
+    //   },
+    // },
+    // {
+    //   name: 'webkit',
+    //   use: {
+    //     ...devices['Desktop Safari'],
+    //   },
+    // },
     /* Test against mobile viewports. */
     // {
     //   name: 'Mobile Chrome',
@@ -82,7 +88,6 @@ const config: PlaywrightTestConfig = {
     //     ...devices['iPhone 12'],
     //   },
     // },
-
     /* Test against branded browsers. */
     // {
     //   name: 'Microsoft Edge',

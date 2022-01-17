@@ -8,9 +8,9 @@ const sqlConfig = {
   server: SERVER,
 };
 
-async function getDataFromDB(admins) {
+async function getAddedAdminsData(addAdminToCalendar) {
   const receivedData = [];
-  for (let adminName of admins) {
+  for (let adminName of addAdminToCalendar) {
     try {
       await sql.connect(sqlConfig);
       let result = {};
@@ -42,4 +42,4 @@ async function getDataFromDB(admins) {
   return receivedData;
 }
 
-export { getDataFromDB };
+export { getAddedAdminsData };
