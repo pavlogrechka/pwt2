@@ -1,7 +1,11 @@
 import { test, expect } from '@playwright/test';
 import { locatorsConsole } from '../../aptem/locators/locatorsConsole';
 
-const authConsole = async ({ page }, login = 'mwsadmin', password = '?evDFH7YM5MXz8WVmxrR') => {
+const authConsole = async (
+  { page },
+  login = 'mwsadmin',
+  password = '?evDFH7YM5MXz8WVmxrR'
+) => {
   console.log(`taken Login is = ${login}`);
   console.log(`taken password is = ${password}`);
   await page.goto('https://pavlo-uat.uat.aptem.dev/pwa');
