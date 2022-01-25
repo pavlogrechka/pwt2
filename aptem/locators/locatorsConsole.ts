@@ -34,7 +34,13 @@ const locatorsConsole = {
   },
   learnersGrig: {
     filtersButton: '//button[@routerlink="/learners/filter"]',
-    searchInput: '//input[@id="learnerSearch"]',
+    searchInput: '//input[contains(@class,"input-icon-text k-textbox")]',
+    // searchInput: '//input[@id="learnerSearch"]',
+    foundUser: '//tr/td//span[text()="Learner10 CreatedByCSV"]',
+  },
+  learnerDashboard: {
+    learnerProfileButton: '//button[text()=" Learner Profile "]',
+    addProgrammeButton: '//a/span[text()="Add Programme Details "]',
   },
   reviewGrid: {
     mainTitle: '//h1',

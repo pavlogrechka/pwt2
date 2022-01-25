@@ -5,7 +5,7 @@ import credentials from '../../../aptem/authCredentials/credentialsData.json';
 import { authConsole } from '../../baseSteps/authConsole.ts';
 
 const testInitConfig = {
-  admin: {
+  credential: {
     login: 'mwsadmin',
     password: '?evDFH7YM5MXz8WVmxrR',
   },

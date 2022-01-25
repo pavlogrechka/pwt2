@@ -12,6 +12,7 @@ const generateUsersList = (count) => {
   }
 };
 
+//set number of users to generate as props
 generateUsersList(1);
 
 test.beforeEach(async ({ page }) => {

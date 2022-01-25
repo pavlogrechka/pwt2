@@ -31,7 +31,7 @@ test('test1', async ({ page }) => {
   await page.click(`//td//*[text()="${testInitConfig.reviewName}"]/../../td[5]//a`);
 
   for await (let admin of receivedData) {
-    await page.waitForTimeout(500);
+    await page.waitForTimeout(700);
     await page.click(locatorsConsole.reviewGrid.scheduledAssistant.addCalendarsButton);
     await page.fill(locatorsConsole.reviewGrid.scheduledAssistant.searchByName, admin.adminFullName);
     const adminFound = await page.locator('//table[@class="ng-star-inserted"]/tbody[1]/tr[1]/td[2]');
@@ -57,27 +57,20 @@ test('test1', async ({ page }) => {
 
   let row: number = 4;
   for await (let admin of receivedData) {
-    console.log(admin.adminFullName);
+    // console.log(admin.adminFullName);
     const adminName = await page.locator(`//tr[${row}]//img[@alt="user"]/following-sibling::span`);
     await expect(adminName).toContainText(`${admin.adminFullName}`);
 
-    console.log(admin.adminCurrentCaseLoad);
+    // console.log(admin.adminCurrentCaseLoad);
     const currentCaseload = await page.locator(`//tr[${row}]//div/div[2]/span`);
     !admin.adminCurrentCaseLoad ? (admin.adminCurrentCaseLoad = '-') : (admin.adminCurrentCaseLoad = admin.adminCurrentCaseLoad + '');
     await expect(currentCaseload).toContainText(`${admin.adminCurrentCaseLoad}`);
 
-    console.log(admin.adminCaseLoadCapacity);
+    // console.log(admin.adminCaseLoadCapacity);
     const caseLoadCapacity = await page.locator(`//tr[${row}]//div/div[3]/span`);
     !admin.adminCaseLoadCapacity ? (admin.adminCaseLoadCapacity = '-') : (admin.adminCaseLoadCapacity = admin.adminCaseLoadCapacity + '');
     await expect(caseLoadCapacity).toContainText(`${admin.adminCaseLoadCapacity}`);
 
     await row++;
   }
-
-  // await page.hover('//td[@data-slot-index="3:0:8"]');
-  // // await page.click('//td[@data-slot-index="3:0:8"]');
-  // await page.waitForTimeout(500);
-  // await page.hover('//td[@data-slot-index="4:0:8"]');
-  // // await page.click('//td[@data-slot-index="4:0:8"]');
-  // await page.waitForTimeout(500);
 });
