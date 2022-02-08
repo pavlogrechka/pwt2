@@ -22,7 +22,7 @@ const locatorsConsole = {
     dashBoard: '//menu[@id="menu-learner"]/nav/ul/li/a[@href="/pwa/caseload-dashboard"]',
     learners: '//menu[@id="menu-learner"]/nav/ul/li/a[@href="/pwa/learners"]',
     jobFinder: '//menu[@id="menu-learner"]/nav/ul/li/a[@href="/pwa/jobfinder"]',
-    jobFinder: '//menu[@id="menu-learner"]/nav/ul/li/a[@href="/pwa/jobfinder"]',
+    // jobFinder: '//menu[@id="menu-learner"]/nav/ul/li/a[@href="/pwa/jobfinder"]',
     signatures: '//menu[@id="menu-learner"]/nav/ul/li/a[@href="/pwa/signatures"]',
     tasks: '//menu[@id="menu-learner"]/nav/ul/li/a[@href="/pwa/tasks"]',
     messages: '//a[@href="/pwa/messages"]',
@@ -37,6 +37,11 @@ const locatorsConsole = {
     searchInput: '//input[contains(@class,"input-icon-text k-textbox")]',
     // searchInput: '//input[@id="learnerSearch"]',
     foundUser: '//tr/td//span[text()="Learner10 CreatedByCSV"]',
+    sidePanelFilters:{
+      container:  '#sidepanel-container',
+      groupsLabel: '//label[text()="Groups"]',
+      groupNameContainer: '//nz-tree-node-title/span',
+    },
   },
   learnerDashboard: {
     learnerProfileButton: '//button[text()=" Learner Profile "]',
@@ -45,7 +50,7 @@ const locatorsConsole = {
   reviewGrid: {
     mainTitle: '//h1',
     plannedReviewButton: '//button[text()="Planned "]',
-    plannedReviewButton: '//button[text()="Completed "]',
+    // plannedReviewButton: '//button[text()="Completed "]',
     createReviewButton: '//button[@routerlink="planned-review/create"]/svg-icon/../span[text()="Create Review"]',
     row: {
       firstRow: '//tbody/tr[position()=1]',
@@ -75,7 +80,7 @@ const locatorsConsole = {
       createTaskFor: '//*[@formcontrolname="reviewerId"]',
       useZoom: '//input[@id="isZoomUsedInput"]',
       saveButton: '//button[text()="Save"]',
-      cancelButton: '//button[text()="Cancel"]',
+      // cancelButton: '//button[text()="Cancel"]',
     },
     scheduledAssistant: {
       backButton: '//button[@aria-label="back"]',

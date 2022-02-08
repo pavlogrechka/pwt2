@@ -9,6 +9,7 @@
   "license": "ISC",
   "devDependencies": {
     "@playwright/test": "^1.17.2",
-    "mssql": "^7.3.0"
+    "mssql": "^7.3.0",
+    "pkg-dir": "^6.0.1"
   }
 }

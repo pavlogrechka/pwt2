@@ -12,6 +12,7 @@ const testInitConfig = {
   programDescription: `Delivery Program name ${Date.now()} created by Playwright`,
 };
 
+const date = new Date();
 test('test', async ({ page }) => {
   authClassic(
     { page },

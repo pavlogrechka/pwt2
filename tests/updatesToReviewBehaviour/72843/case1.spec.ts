@@ -1,28 +1,36 @@
 import { test, expect } from '@playwright/test';
-import { locatorsConsole } from '../../../aptem/locators/locatorsConsole';
+// import { locatorsConsole } from '../../../aptem/locators/locatorsConsole';
 import { authConsole } from '../../baseSteps/authConsole';
-import ITestInitConfig from './types/index'
+import ITestInitConfig from '../types/index'
+
+const getDate = () => {
+  const date = new Date()
+  const created = 'created:' + date.toLocaleDateString('en-gb')
+  const reviewId = 'id:' + date.getTime()
+  const currentDate = created + ' ' + reviewId
+  return currentDate
+}
 
 const testInitConfig: ITestInitConfig = {
   credential: {
     login: 'mwsadmin',
     password: '?evDFH7YM5MXz8WVmxrR',
-    url: 'https://review.test2.aptem.dev/pwa/'
+    url: 'https://review.test2.aptem.dev/pwa/learners/19766/reviews/upcoming'
   },
   createReview: {
-    reviewName: 'testReview',
+    reviewName: `Review ${getDate()}`,
     programName: 0, /*0 = delivery/onboarding program, 1 = subProgram*/
     reviewType: 'Tutor&Learner signatures required',
     completionMode: 1, /*0 = All evidence accepted, as default; 1 = Tutor decided */
     instructions: '',
     evidenceRequired: true,
     completedBy: '',
-    completedByValue: '10/10/2022',
+    completedByValue: '10-03-2022',
     reviewer: 'TestReview Admin',
     uploadFile: '',
     createTaskFor: '',
-    scheduleReview: false,
-    scheduleDate: '11-10-2022',
+    scheduleReview: true,
+    scheduleDate: '10-03-2022',
     startTime: '10-00',
     endTime: '10-40',
     useZoom: false,
@@ -30,30 +38,28 @@ const testInitConfig: ITestInitConfig = {
   others: {
     learnerName: 'Review Learner24',
     groupTitle: 'testReview',
-    reviewName: 'testReview',
+    waitForSelectorTimeout: 5000,
   }
 }
 
 test('test1', async ({ page }) => {
+
+  // const newDate = testInitConfig.createReview.scheduleDate.split('-')
+  // const reverse = newDate.reverse()
+  // let date = new Date(+reverse[0], +reverse[1] - 1, +reverse[2])
+  // let shortMonth = date.toLocaleString('en-us', { month: 'short' });
+  const day = testInitConfig.createReview.scheduleDate.substring(0, 2)
+  const date = testInitConfig.createReview.scheduleDate.split('-').reverse()
+  let shortMonth = new Date(+date[0], +date[1] - 1, +date[2]).toLocaleString('en-us', { month: 'short' });
+  console.log(day, shortMonth)
+
   await authConsole({ page },
     testInitConfig.credential.login,
     testInitConfig.credential.password,
     testInitConfig.credential.url
   );
 
-  await page.click('a:nth-child(2) .d-flex .svg-fill svg');
-  let assertion = await page.textContent('h1.my-0');
-  expect(assertion).toBe('Learners');
-  await page.click(locatorsConsole.learnersGrig.filtersButton);
-  await page.click(locatorsConsole.learnersGrig.sidePanelFilters.groupsLabel);
-  await page.locator(`nz-tree-node-title>span:has-text('${testInitConfig.others.groupTitle}')`).click();
-  await page.waitForLoadState('networkidle');
 
-  //user learner search input field
-  await page.fill('#learnerOrInsuranceNumberSearch', testInitConfig.others.learnerName);
-
-  await page.locator(`span:has-text('${testInitConfig.others.learnerName}')`).click();
-  await page.locator('//nav/ul/li/a/span[2]/label[text()="Reviews"]').click();
   await page.click('button:has-text("Create Review")');
 
   await page.fill('input[type="text"]', `${testInitConfig.createReview.reviewName}`);
@@ -70,9 +76,13 @@ test('test1', async ({ page }) => {
     await page.click('li[role="option"]:has-text("Tutor decides")')
   }
 
+  // set completed by
   await page.click('[formcontrolname="lengthUnit"]');
   await page.click('text=Date');
-  await page.type('//input[@role="spinbutton"]', `span:has-text("10-10-2022)`);
+  await page.type('//input[@role="spinbutton"]',
+    `span:has-text("${testInitConfig.createReview.completedByValue}")`);
+
+  // set Reviewer
   await page.click('[formcontrolname="reviewerId"]');
   await page.click(`text=${testInitConfig.createReview.reviewer}`);
 
@@ -98,29 +108,8 @@ test('test1', async ({ page }) => {
 
   await page.click('text=Save')
 
-  if (`//td/p[text()="${testInitConfig.createReview.reviewName}"]/../..//a`) {
-    await page.click(`//td/p[text()="${testInitConfig.createReview.reviewName}"]/../..//a`)
-  } else {
-    await page.click('[aria-label="Go to the next page"]')
-    await page.click(`//td/p[text()="${testInitConfig.createReview.reviewName}"]/../..//a`)
-  }
+  // Assert date
 
-  await page.click('//span[text()="Add Calendars"]')
 
-  await page.click('text=testReview[object Text]')
 
-  // const a = await page.$$('nz-tree-node-checkbox')
-  const items = page.locator('nz-tree-node-checkbox')
-
-  const texts = await items.allTextContents();
-  console.log(texts)
-  // console.log(items.length)
-
-  // for (const elem of a) {
-  //   if (!elem.classList.contains('ant-select-tree-checkbox-checked')) {
-  //     elem.classList.add('ant-select-tree-checkbox-checked')
-  //   }
-  // }
-
-  await page.waitForTimeout(5000);
 });

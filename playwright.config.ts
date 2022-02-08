@@ -29,7 +29,7 @@ const config: PlaywrightTestConfig = {
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
     ['dot'],
-    ['html'],
+    // ['html'],
     // ['json', { outputFile: 'test-result.json'}],
     // [
     // 'html',
@@ -44,9 +44,9 @@ const config: PlaywrightTestConfig = {
     /* Maximum time each action such as `click()` can take. Defaults to 0 (no limit). */
     // actionTimeout: 0,
     headless: !true,
-    screenshot: 'on',
-    video: 'on',
-    trace: 'on',
+    // screenshot: 'on',
+    // video: 'on',
+    // trace: 'on',
 
     /* Base URL to use in actions like `await page.goto('/')`. */
     // baseURL: 'http://localhost:3000',
