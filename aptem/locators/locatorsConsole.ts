@@ -37,8 +37,8 @@ const locatorsConsole = {
     searchInput: '//input[contains(@class,"input-icon-text k-textbox")]',
     // searchInput: '//input[@id="learnerSearch"]',
     foundUser: '//tr/td//span[text()="Learner10 CreatedByCSV"]',
-    sidePanelFilters:{
-      container:  '#sidepanel-container',
+    sidePanelFilters: {
+      container: '#sidepanel-container',
       groupsLabel: '//label[text()="Groups"]',
       groupNameContainer: '//nz-tree-node-title/span',
     },
@@ -47,11 +47,18 @@ const locatorsConsole = {
     learnerProfileButton: '//button[text()=" Learner Profile "]',
     addProgrammeButton: '//a/span[text()="Add Programme Details "]',
   },
-  reviewGrid: {
+  reviewsGrid: {
     mainTitle: '//h1',
     plannedReviewButton: '//button[text()="Planned "]',
-    // plannedReviewButton: '//button[text()="Completed "]',
+    finishedReviewButton: '//reviews-container//button[text()="Finished "]',
     createReviewButton: '//button[@routerlink="planned-review/create"]/svg-icon/../span[text()="Create Review"]',
+    reviewsList: {
+      reviewsListHeader: {},
+      reviewsItem: {
+        // row: `//tbody/tr[position()=${rowNumber}]`,
+      },
+      reviewsListPagination: {},
+    },
     row: {
       firstRow: '//tbody/tr[position()=1]',
       reviewName: '//tbody/tr[position()=1]//td[position()="2"]/p',
@@ -98,4 +105,6 @@ const locatorsConsole = {
   },
 };
 
-export { locatorsConsole };
+export {
+  locatorsConsole,
+};
