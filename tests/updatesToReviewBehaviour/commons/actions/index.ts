@@ -4,7 +4,7 @@ import { scheduleReview } from './scheduleReview'
 import { getDateForName } from './getDateforName'
 import { setReviewer } from './setReviewer'
 import { checkUseZoom } from './checkUseZoom'
-
+import { setReviewType } from './setReviewType'
 
 export {
   setCompletedBy,
@@ -13,6 +13,7 @@ export {
   getDateForName,
   setReviewer,
   checkUseZoom,
+  setReviewType,
 }
 
 

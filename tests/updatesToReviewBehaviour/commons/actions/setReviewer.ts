@@ -1,4 +1,4 @@
-import { createReviewForm } from '../locators'
+import { createReviewForm } from '../selectors'
 
 export const setReviewer = async ({ page }, reviewer: string | null) => {
   await page.click(createReviewForm.reviewerDD)

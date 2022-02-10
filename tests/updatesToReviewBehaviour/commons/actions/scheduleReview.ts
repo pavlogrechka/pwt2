@@ -1,4 +1,4 @@
-import { createReviewForm } from '../locators'
+import { createReviewForm } from '../selectors'
 
 export const scheduleReview = async ({ page },
   param: boolean,

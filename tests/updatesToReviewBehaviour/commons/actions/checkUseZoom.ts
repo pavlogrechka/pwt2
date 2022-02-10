@@ -1,5 +1,5 @@
 import { expect } from '@playwright/test'
-import { createReviewForm } from '../locators'
+import { createReviewForm } from '../selectors'
 
 export const checkUseZoom = async ({ page }, param: boolean) => {
   if (!param) return console.log('param was not received');

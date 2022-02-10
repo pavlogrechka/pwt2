@@ -1,4 +1,4 @@
-import { createReviewForm } from '../locators/index'
+import { createReviewForm } from '../selectors'
 
 export const setCompletedBy = async ({ page },
   completedBy: string,
