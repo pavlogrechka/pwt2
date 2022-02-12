@@ -1,6 +1,5 @@
 import { test, expect } from '@playwright/test';
 import { authConsole } from '../../baseSteps/authConsole';
-import { locatorsConsole } from '../../../aptem/locators/locatorsConsole'
 import { createReviewForm, reviewsGrid } from '../commons/selectors'
 import ITestInitConfig from '../types/index'
 import {
@@ -22,7 +21,7 @@ export const testInitConfig: ITestInitConfig = {
   createReview: {
     reviewName: `72852 case#1 ${getDateForName()}`,
     programName: 0, /*0 = delivery/onboarding program, 1 = subProgram*/
-    reviewType: 'Tutor&Learner signatures required',
+    reviewType: '1/19/2022_visibleToAll_adv+participant_sign',
     completionMode: 1, /*0 = All evidence accepted, as default; 1 = Tutor decided */
     instructions: '',
     evidenceRequired: true,
@@ -46,13 +45,11 @@ export const testInitConfig: ITestInitConfig = {
 }
 
 test('test1', async ({ page }) => {
-  const { login, password, url } = testInitConfig.credential
-
   await authConsole(
     { page },
-    login,
-    password,
-    url
+    testInitConfig.credential.login,
+    testInitConfig.credential.password,
+    testInitConfig.credential.url,
   );
 
   await (await page.waitForSelector(reviewsGrid.createReviewBtn)).click()
@@ -82,14 +79,28 @@ test('test1', async ({ page }) => {
 
   await page.click('text=Save')
 
+  // await page.waitForTimeout(3000)
+
   const learningPlanNavBtn = '//label[text()="Learning Plan"]'
+  await page.waitForSelector(learningPlanNavBtn)
   await page.locator(learningPlanNavBtn).click()
 
+  const clearFiltersButton = '//div/button[position()=1]//span[contains(text(),"Filters")]/..//button'
+  if (await page.isVisible(clearFiltersButton)) {
+    await page.click(clearFiltersButton)
+  }
+
+  await page.locator('//button//span[text()=" Expand all"]').click()
+
   const learningPlanItem = `//button/div/p[text()="${testInitConfig.createReview.reviewName}"]`
+  await page.hover(clearFiltersButton)
   await page.locator(learningPlanItem).click()
 
-  const learningPlanItemStatus = `//button/div/p[text()="${testInitConfig.createReview.reviewName}"]/../..//div/div[text()="${itemStatus}"]`
-  await page.locator(learningPlanItemStatus).click()
+  expect(page.locator(learningPlanItem)).toHaveText('')
+  expect(page.locator(learningPlanItem).isVisible())
+
+  // const learningPlanItemStatus = `//button/div/p[text()="${testInitConfig.createReview.reviewName}"]/../..//div/div[text()="${itemStatus}"]`
+  // await page.locator(learningPlanItemStatus).click()
 
 
   // const learningPlanItemStatusAddInfoBar = `//review-status-badge/span[text()="In Progress"]`

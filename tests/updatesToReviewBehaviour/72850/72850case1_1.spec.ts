@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import { authConsole } from '../../baseSteps/authConsole';
 import { locatorsConsole } from '../../../aptem/locators/locatorsConsole'
 import { createReviewForm, reviewsGrid } from '../commons/selectors'
-import ITestInitConfig from '../types/index'
+import ITestInitConfig from '../types'
 import {
   scheduleReview,
   setCompletionMode,
