@@ -1,7 +1,14 @@
-import { createReviewForm } from './createReviewForm';
-import { reviewsGrid } from './reviewsGrid';
+import { reviewsGrid, createReviewForm } from './reviewsGrid'
+import {
+  learningPlanComponentItemAdditionalInfo,
+  learningPlanGrid,
+  menuAdminNav
+} from './learningPlanGrid'
 
 export {
+  learningPlanComponentItemAdditionalInfo,
+  learningPlanGrid,
+  menuAdminNav,
+  reviewsGrid,
   createReviewForm,
-  reviewsGrid
 }
